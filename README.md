@@ -96,7 +96,7 @@ C:\Tor Browser\Browser\TorBrowser\Data\Tor\
 
 and add the following two lines:
 
-HiddenServiceDir C:\Tor Browser\Browser\TorBrowser\Data\Tor\hidden_service
+HiddenServiceDir C:\Tor Browser\Browser\TorBrowser\Data\Tor\hidden_service  
 HiddenServicePort 8080 127.0.0.1:8080
 
 Restart Tor Browser and your Tor Hidden Service folder will be created at
