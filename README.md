@@ -116,3 +116,5 @@ friends, as long as Tor Browser with oc_server.go is running.
 
 If you like the idea of point to point communication, without third-party
 servers involved, consider a donation to the following Bitcoin address:
+
+bc1qhgek8p5qcwz7r6502y8tvenkpsw9w5yafhatxk
