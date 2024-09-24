@@ -72,7 +72,6 @@ $ oc_client -d server_data.txt -f myfile.txt
 - By default, the client uses the Tor network. Make sure you have Tor
   running on your system (usually on port 9050).
 - When using the `-clearnet` option, your IP address will be visible to the server.
-- The `-f` option allows you to specify the filename that will be used on the server.
 
 ## Security Considerations
 
