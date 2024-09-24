@@ -68,5 +68,5 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(os.Stderr, "File received: %s at %s by %s\n", header.Filename, currentTime, username)
 
 	// Output to the client
-	fmt.Fprintf(w, "File %s successfully uploaded to %s", header.Filename, dstPath)
+	fmt.Fprintf(w, "File %s successfully uploaded!", header.Filename)
 }
