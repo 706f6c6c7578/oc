@@ -104,6 +104,8 @@ the same location your torrc file resides. Look at the file 'hostname' which
 contains the .onion URL for your Tor Hidden Service and give the address to
 your friends.
 
+Edit the password in line 13 of the source code and compile.
+
 Now run the compiled oc_server.go with the -p parameter, for the file path files
 should be stored.
 
