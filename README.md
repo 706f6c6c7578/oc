@@ -47,7 +47,7 @@ The data file should contain the server address:port and password, separated by 
 
 - `-u [username]`: Specify an optional username
 - `[-clearnet`]: Use clearnet instead of Tor network
-- `-f <filename>`: Specify the filename to be used on the server
+- `-f <filename>`: Specify the filename to be send, which is used on the server
 - `-d <data_file>`: Use a data file containing server address and password
 
 ## Examples
