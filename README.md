@@ -75,7 +75,6 @@ $ oc_client -d server_data.txt -f myfile.txt
 
 ## Security Considerations
 
-- Always use HTTPS URLs for the server when possible, especially when using clearnet.
 - Be cautious when uploading sensitive files and consider using encryption before upload.
 - The Tor network provides anonymity but may be slower than clearnet uploads.
 
