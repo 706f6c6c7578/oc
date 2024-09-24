@@ -39,7 +39,7 @@ $ oc_client [-u username] [-d datafile] [-clearnet] -f <filename> <server_addres
 
 ### Using a Data File
 
-$ oc_client [-u username] -d <data_file> [-clearnet] -f <filename>
+$ oc_client [-u username] -d <data_file> [-clearnet] -f filename
 
 The data file should contain the server address:port and password, separated by a space, on a single line.
 
