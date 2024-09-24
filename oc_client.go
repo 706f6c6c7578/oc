@@ -1,0 +1,169 @@
+package main
+
+import (
+	"bufio"
+	"flag"
+	"fmt"
+	"io"
+	"mime/multipart"
+	"net/http"
+	"os"
+	"strings"
+	"time"
+
+	"golang.org/x/net/proxy"
+)
+
+var startTime time.Time
+
+func main() {
+	var username string
+	var dataFile string
+	var useClearnet bool
+	var filename string
+	flag.StringVar(&username, "u", "", "Optional username")
+	flag.StringVar(&dataFile, "d", "", "File containing server address, port, and password")
+	flag.BoolVar(&useClearnet, "clearnet", false, "Use clearnet instead of Tor")
+	flag.StringVar(&filename, "f", "", "File to upload")
+	flag.Parse()
+
+	var serverAddress, password string
+	var err error
+
+	if dataFile != "" {
+		serverAddress, password, err = readDataFile(dataFile)
+		if err != nil {
+			fmt.Printf("Error reading data file: %v\n", err)
+			os.Exit(1)
+		}
+	} else {
+		args := flag.Args()
+		if len(args) != 2 {
+			fmt.Println("Usage: oc [-u username] [-d datafile] [-clearnet] -f <filename> <server_address:port> <password>")
+			os.Exit(1)
+		}
+		serverAddress, password = args[0], args[1]
+	}
+
+	if !strings.HasPrefix(serverAddress, "http://") && !strings.HasPrefix(serverAddress, "https://") {
+		serverAddress = "http://" + serverAddress
+	}
+
+	serverURL := serverAddress + "/upload"
+
+	err = uploadFile(serverURL, password, username, filename, !useClearnet)
+	if err != nil {
+		fmt.Printf("\nError uploading file: %v\n", err)
+		os.Exit(1)
+	}
+}
+
+func readDataFile(filename string) (string, string, error) {
+	file, err := os.Open(filename)
+	if err != nil {
+		return "", "", err
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	if scanner.Scan() {
+		parts := strings.Fields(scanner.Text())
+		if len(parts) != 2 {
+			return "", "", fmt.Errorf("invalid data file format")
+		}
+		return parts[0], parts[1], nil
+	}
+	return "", "", fmt.Errorf("empty data file")
+}
+
+func uploadFile(serverURL, password, username, filename string, useTor bool) error {
+	file, err := os.Open(filename)
+	if err != nil {
+		return fmt.Errorf("failed to open file: %w", err)
+	}
+	defer file.Close()
+
+	pipeReader, pipeWriter := io.Pipe()
+	writer := multipart.NewWriter(pipeWriter)
+
+	startTime = time.Now()
+	go func() {
+		defer pipeWriter.Close()
+		defer writer.Close()
+
+		part, err := writer.CreateFormFile("file", filename)
+		if err != nil {
+			fmt.Printf("Error creating form file: %v\n", err)
+			return
+		}
+
+		_, err = io.Copy(part, file)
+		if err != nil {
+			fmt.Printf("Error copying file content: %v\n", err)
+		}
+	}()
+
+	var client *http.Client
+	if useTor {
+		dialer, err := proxy.SOCKS5("tcp", "localhost:9050", nil, proxy.Direct)
+		if err != nil {
+			return fmt.Errorf("can't connect to the Tor proxy: %v", err)
+		}
+		httpTransport := &http.Transport{Dial: dialer.Dial}
+		client = &http.Client{Transport: httpTransport}
+		fmt.Println("Using Tor network")
+	} else {
+		client = &http.Client{}
+		fmt.Println("Using clearnet")
+	}
+
+	request, err := http.NewRequest("POST", serverURL, pipeReader)
+	if err != nil {
+		return fmt.Errorf("failed to create request: %w", err)
+	}
+	request.Header.Set("Content-Type", writer.FormDataContentType())
+	request.Header.Set("X-Password", password)
+	if username != "" {
+		request.Header.Set("X-Username", username)
+	}
+
+	fmt.Print("Uploading...")
+
+	response, err := client.Do(request)
+	if err != nil {
+		return fmt.Errorf("failed to send request: %w", err)
+	}
+	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusOK {
+		bodyBytes, _ := io.ReadAll(response.Body)
+		return fmt.Errorf("unexpected status: %s, body: %s", response.Status, string(bodyBytes))
+	}
+
+	responseBody, err := io.ReadAll(response.Body)
+	if err != nil {
+		return fmt.Errorf("failed to read response body: %w", err)
+	}
+
+	elapsedTime := time.Since(startTime)
+	fmt.Printf("\nFile uploaded successfully. Total time: %s\n", formatDuration(elapsedTime))
+	fmt.Println("Server response:", string(responseBody))
+	return nil
+}
+
+func formatDuration(d time.Duration) string {
+	d = d.Round(time.Second)
+	h := d / time.Hour
+	d -= h * time.Hour
+	m := d / time.Minute
+	d -= m * time.Minute
+	s := d / time.Second
+	
+	if h > 0 {
+		return fmt.Sprintf("%d hours %d minutes %d seconds", h, m, s)
+	} else if m > 0 {
+		return fmt.Sprintf("%d minutes %d seconds", m, s)
+	} else {
+		return fmt.Sprintf("%d seconds", s)
+	}
+}
