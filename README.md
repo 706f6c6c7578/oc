@@ -41,7 +41,8 @@ $ oc_client [-u username] [-d datafile] [-clearnet] -f <filename> <server_addres
 
 $ oc_client [-u username] -d <data_file> [-clearnet] -f filename
 
-The data file should contain the server address:port and password, separated by a space, on a single line.
+The data file should contain the server address:port and password, separated by a space, on a single line.  
+Multiple entries are supported.
 
 ## Options
 
