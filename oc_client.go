@@ -22,19 +22,29 @@ func main() {
 	var useClearnet bool
 	var filename string
 	flag.StringVar(&username, "u", "", "Optional username")
-	flag.StringVar(&dataFile, "d", "", "File containing server address, port, and password")
+	flag.StringVar(&dataFile, "d", "", "File containing server addresses, ports, and passwords")
 	flag.BoolVar(&useClearnet, "clearnet", false, "Use clearnet instead of Tor")
 	flag.StringVar(&filename, "f", "", "File to upload")
 	flag.Parse()
 
-	var serverAddress, password string
 	var err error
 
 	if dataFile != "" {
-		serverAddress, password, err = readDataFile(dataFile)
+		addresses, err := readDataFile(dataFile)
 		if err != nil {
 			fmt.Printf("Error reading data file: %v\n", err)
 			os.Exit(1)
+		}
+		for _, addr := range addresses {
+			serverAddress, password := addr[0], addr[1]
+			if !strings.HasPrefix(serverAddress, "http://") && !strings.HasPrefix(serverAddress, "https://") {
+				serverAddress = "http://" + serverAddress
+			}
+			serverURL := serverAddress + "/upload"
+			err = uploadFile(serverURL, password, username, filename, !useClearnet)
+			if err != nil {
+				fmt.Printf("\nError uploading file to %s: %v\n", serverAddress, err)
+			}
 		}
 	} else {
 		args := flag.Args()
@@ -42,38 +52,39 @@ func main() {
 			fmt.Println("Usage: oc [-u username] [-d datafile] [-clearnet] -f <filename> <server_address:port> <password>")
 			os.Exit(1)
 		}
-		serverAddress, password = args[0], args[1]
-	}
-
-	if !strings.HasPrefix(serverAddress, "http://") && !strings.HasPrefix(serverAddress, "https://") {
-		serverAddress = "http://" + serverAddress
-	}
-
-	serverURL := serverAddress + "/upload"
-
-	err = uploadFile(serverURL, password, username, filename, !useClearnet)
-	if err != nil {
-		fmt.Printf("\nError uploading file: %v\n", err)
-		os.Exit(1)
+		serverAddress, password := args[0], args[1]
+		if !strings.HasPrefix(serverAddress, "http://") && !strings.HasPrefix(serverAddress, "https://") {
+			serverAddress = "http://" + serverAddress
+		}
+		serverURL := serverAddress + "/upload"
+		err = uploadFile(serverURL, password, username, filename, !useClearnet)
+		if err != nil {
+			fmt.Printf("\nError uploading file: %v\n", err)
+			os.Exit(1)
+		}
 	}
 }
 
-func readDataFile(filename string) (string, string, error) {
+func readDataFile(filename string) ([][]string, error) {
 	file, err := os.Open(filename)
 	if err != nil {
-		return "", "", err
+		return nil, err
 	}
 	defer file.Close()
 
+	var addresses [][]string
 	scanner := bufio.NewScanner(file)
-	if scanner.Scan() {
+	for scanner.Scan() {
 		parts := strings.Fields(scanner.Text())
 		if len(parts) != 2 {
-			return "", "", fmt.Errorf("invalid data file format")
+			return nil, fmt.Errorf("invalid data file format")
 		}
-		return parts[0], parts[1], nil
+		addresses = append(addresses, parts)
 	}
-	return "", "", fmt.Errorf("empty data file")
+	if err := scanner.Err(); err != nil {
+		return nil, err
+	}
+	return addresses, nil
 }
 
 func uploadFile(serverURL, password, username, filename string, useTor bool) error {
