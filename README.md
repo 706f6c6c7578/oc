@@ -7,9 +7,9 @@ It supports various options for flexibility and ease of use.
 
 ## Features
 
-- Upload files through Tor network (default) or clearnet
+- Upload data through Tor network (default) or clearnet
 - Optional username support
-- Use of a data file for server address and password
+- Use of a data file for server address:port and password
 
 ## Requirements
 
