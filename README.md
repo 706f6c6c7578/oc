@@ -21,7 +21,7 @@ go get golang.org/x/net/proxy
 
 To compile oc_client.go and oc_server.go use:
 
-$ go build -ldflags "-s -w" oc_client.go
+$ go build -ldflags "-s -w" oc_client.go  
 $ go build -ldflags "-s -w" oc_client.go
 
 
