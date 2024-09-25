@@ -49,7 +49,7 @@ Multiple entries are supported.
 - `-u [username]`: Specify an optional username
 - `[-clearnet`]: Use clearnet instead of Tor network
 - `-f <filename>`: Specify the filename to be send, which is used on the server
-- `-d <data_file>`: Use a data file containing server address and password
+- `-d <data_file>`: Use a data file containing server address:port and password
 
 ## Examples
 
