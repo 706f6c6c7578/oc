@@ -35,7 +35,7 @@ $ go build -ldflags "-s -w" oc_client.go
 
 Start tor.exe from the Tor Expert Bundle, then run the compiled oc_client.go program.
 
-$ oc_client [-u username] [-d datafile] [-clearnet] -f <filename> <server_address:port> <password>
+$ oc_client [-u username] [-d datafile] [-clearnet] -f filename <server_address:port> <password>
 
 ### Using a Data File
 
