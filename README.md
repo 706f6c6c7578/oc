@@ -117,5 +117,5 @@ servers involved, consider a donation to the following Bitcoin address:
 
 bc1qhgek8p5qcwz7r6502y8tvenkpsw9w5yafhatxk
 
-This project is dedcated to Alice and Bob.
+This project is dedicated to Alice and Bob.
 
