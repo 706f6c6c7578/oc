@@ -1,4 +1,4 @@
-## Tor-Enabled File Upload Client oc_client.go and Server oc_server.go
+## Tor-Enabled message/file exchange with Client oc_client.go and Server oc_server.go
 
 This client allows you to securely upload files to a server
 using either the Tor network (for enhanced privacy) or clearnet. 
