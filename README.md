@@ -54,17 +54,17 @@ Multiple entries are supported.
 
 ## Examples
 
-1. Upload a file through Tor:
+1. Upload data through Tor:
 
 $ oc_client -f myfile.txt example.com:8080 mypassword
 
 
-2. Upload a file using clearnet with a username:
+2. Upload data using clearnet with a username:
 
 $ oc_client -u myusername -clearnet example.com:8080 mypassword -f myfile.txt
 
 
-3. Upload a file using a data file:
+3. Upload data using a data file:
 
 $ oc_client -d server_data.txt -f myfile.txt
 
