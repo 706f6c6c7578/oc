@@ -79,6 +79,9 @@ func readDataFile(filename string) ([][]string, error) {
 		if strings.HasPrefix(line, "#") {
 			continue // Skip comment lines
 		}
+		// Replace CRLF and LF with a single space
+		line = strings.ReplaceAll(line, "\r\n", " ")
+		line = strings.ReplaceAll(line, "\n", " ")
 		parts := strings.Fields(line)
 		if len(parts) != 2 {
 			return nil, fmt.Errorf("invalid data file format")
