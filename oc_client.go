@@ -145,7 +145,7 @@ func uploadFile(serverURL, password, username, filename string, useTor bool) err
 		request.Header.Set("X-Username", username)
 	}
 
-	fmt.Print("Uploading...")
+	fmt.Print("Send file...")
 
 	response, err := client.Do(request)
 	if err != nil {
@@ -164,7 +164,7 @@ func uploadFile(serverURL, password, username, filename string, useTor bool) err
 	}
 
 	elapsedTime := time.Since(startTime)
-	fmt.Printf("\nFile uploaded successfully. Total time: %s\n", formatDuration(elapsedTime))
+	fmt.Printf("\nFile send succesfully. Total time: %s\n", formatDuration(elapsedTime))
 	fmt.Println("Server response:", string(responseBody))
 	return nil
 }
