@@ -122,6 +122,12 @@ You can omit the usage of Tor Browser and instead use only Tor-Expert-Bundle
 and put the torrc file in the tor folder and start tor.exe with the -f parameter,
 to use the torrc file.
 
+If you put the torrc file into the tor folder, of Tor-Expert-Bundle, the torrc  
+file may look like this:
+
+HiddenServiceDir hidden_service 
+HiddenServicePort 8080 127.0.0.1:8080
+
 If you like the idea of point to point communication, without third-party
 servers involved, consider a donation to the following Bitcoin address:
 
