@@ -75,7 +75,11 @@ func readDataFile(filename string) ([][]string, error) {
 	var addresses [][]string
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		parts := strings.Fields(scanner.Text())
+		line := scanner.Text()
+		if strings.HasPrefix(line, "#") {
+			continue // Skip comment lines
+		}
+		parts := strings.Fields(line)
 		if len(parts) != 2 {
 			return nil, fmt.Errorf("invalid data file format")
 		}
