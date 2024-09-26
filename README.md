@@ -116,6 +116,12 @@ Thats all.
 You now have Tor and Tor Browser running to exchange files with your
 friends, as long as Tor Browser with oc_server.go is running.
 
+## Note
+
+You can omit the usage of Tor Browser and instead use only Tor-Expert-Bundle  
+and put the torrc file in the tor folder and start tor.exe with the -f parameter,  
+to use the torrc file.
+
 If you like the idea of point to point communication, without third-party
 servers involved, consider a donation to the following Bitcoin address:
 
