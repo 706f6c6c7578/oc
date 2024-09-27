@@ -127,6 +127,9 @@ If you put the torrc file into the tor folder, of Tor-Expert-Bundle, the torrc f
 HiddenServiceDir hidden_service  
 HiddenServicePort 8080 127.0.0.1:8080
 
+In the Usenet-Example folder are two examples, for oc_client.go with Dizum's mail2news Gateway  
+and Paganini's News Server, so that you can post articles to Usenet.
+
 If you like the idea of point to point communication, without third-party
 servers involved, consider a donation to the following Bitcoin address:
 
