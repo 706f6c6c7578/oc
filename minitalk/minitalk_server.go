@@ -8,6 +8,11 @@ import (
     "sync"
 )
 
+var (
+    clientConnected bool
+    connMutex       sync.Mutex
+)
+
 func main() {
     listener, err := net.Listen("tcp", "127.0.0.1:8083")
     if err != nil {
@@ -23,13 +28,30 @@ func main() {
             fmt.Println("Error accepting connection:", err)
             continue
         }
+
+        connMutex.Lock()
+        if clientConnected {
+            conn.Close()
+            connMutex.Unlock()
+            continue
+        }
+        clientConnected = true
+        connMutex.Unlock()
+
         fmt.Println("Client connected.")
+        conn.Write([]byte("CONNECTED\n"))
         go handleConnection(conn)
     }
 }
 
 func handleConnection(conn net.Conn) {
-    defer conn.Close()
+    defer func() {
+        conn.Close()
+        connMutex.Lock()
+        clientConnected = false
+        connMutex.Unlock()
+        fmt.Println("Client disconnected.")
+    }()
 
     var wg sync.WaitGroup
     wg.Add(2)
