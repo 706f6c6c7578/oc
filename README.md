@@ -58,7 +58,7 @@ Please note:  The last entry in your data_file must be a single LF or CRLF and n
 
 1. Upload data through Tor:
 
-$ oc_client -f myfile.txt example.com:8080 mypassword
+$ oc_client -f myfile.txt URL.onion:8080 mypassword
 
 
 2. Upload data using clearnet with a username:
