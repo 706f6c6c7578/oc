@@ -130,6 +130,8 @@ HiddenServicePort 8080 127.0.0.1:8080
 In the Usenet-Example folder are two examples, for oc_client.go with Dizum's mail2news Gateway  
 and Paganini's News Server, so that you can post articles to Usenet.
 
+The minitalk folder contains a small talk client and server, so that Alice and Bob can talk to each other.
+
 If you like the idea of point to point communication, without third-party
 servers involved, consider a donation to the following Bitcoin address:
 
