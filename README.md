@@ -129,6 +129,7 @@ HiddenServicePort 8080 127.0.0.1:8080
 HiddenServicePort 8081 127.0.0.1:8081  
 HiddenServicePort 8082 127.0.0.1:8082  
 HiddenServicePort 8083 127.0.0.1:8083  
+HiddenServicePort 8084 127.0.0.1:8084  
 
 In the Usenet-Example folder are two examples, for oc_client.go with Dizum's mail2news Gateway and Paganini's News Server, so that you can post articles to Usenet.
 
