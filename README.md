@@ -130,8 +130,9 @@ HiddenServicePort 8081 127.0.0.1:8081
 HiddenServicePort 8082 127.0.0.1:8082  
 HiddenServicePort 8083 127.0.0.1:8083  
 
-In the Usenet-Example folder are two examples, for oc_client.go with Dizum's mail2news Gateway  
-and Paganini's News Server, so that you can post articles to Usenet.
+In the Usenet-Example folder are two examples, for oc_client.go with Dizum's mail2news Gateway and Paganini's News Server, so that you can post articles to Usenet.
+
+The Nomen_Nescio folder contains a server and command for sending anonymous email messages to the Dizum TypeI Cypherpunk Remailer.
 
 The minitalk folder contains a small talk client and server, so that Alice and Bob can talk to each other.
 
