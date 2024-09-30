@@ -56,17 +56,17 @@ Please note:  The last entry in your data_file must be a single LF or CRLF and n
 
 ## Examples
 
-1. Upload data through Tor:
+1. Send data through Tor:
 
 $ oc_client -f myfile.txt URL.onion:8080 mypassword
 
 
-2. Upload data using clearnet with a username:
+2. Send data using clearnet with a username:
 
 $ oc_client -u myusername -clearnet example.com:8080 mypassword -f myfile.txt
 
 
-3. Upload data using a data file:
+3. Send data using a data file:
 
 $ oc_client -d server_data.txt -f myfile.txt
 
@@ -79,8 +79,8 @@ $ oc_client -d server_data.txt -f myfile.txt
 
 ## Security Considerations
 
-- Be cautious when uploading sensitive files and consider using encryption before upload.
-- The Tor network provides anonymity but may be slower than clearnet uploads.
+- Be cautious when sending sensitive files and consider using encryption before sending.
+- The Tor network provides anonymity but may be slower than data send through clearnet.
 
 
 ## Server oc_server.go
