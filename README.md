@@ -1,13 +1,13 @@
 ## Tor-Enabled data exchange with Client oc_client.go and Server oc_server.go
 
 ## Client oc_client.go
-This client allows you to securely upload files to a server
+This client allows you to securely send files to a server
 using either the Tor network (for enhanced privacy) or clearnet.  
 It supports various options for flexibility and ease of use.
 
 ## Features
 
-- Upload data through Tor network (default) or clearnet
+- Send data through Tor network (default) or clearnet
 - Optional username support
 - Use of a data file for server address:port and password
 
