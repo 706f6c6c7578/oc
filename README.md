@@ -131,11 +131,10 @@ HiddenServicePort 8082 127.0.0.1:8082
 HiddenServicePort 8083 127.0.0.1:8083  
 HiddenServicePort 8084 127.0.0.1:8084  
 
-In the Usenet-Example folder are two examples, for oc_client.go with Dizum's mail2news Gateway and Paganini's News Server, so that you can post articles to Usenet.
-
-The Nomen_Nescio folder contains a server and command for sending anonymous email messages to the Dizum TypeI Cypherpunk Remailer.
-
 The minitalk folder contains a small talk client and server, so that Alice and Bob can talk to each other.
+
+oc_paganini_server.go allows you to post to Usenet anonymously, with oc_client.go, via the Paganini Newsserver's .onion URL.  
+This results in 6 hops, instead of 3.
 
 If you like the idea of point to point communication, without third-party
 servers involved, consider a donation to the following Bitcoin address:
