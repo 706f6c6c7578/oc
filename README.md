@@ -136,7 +136,7 @@ The minitalk folder contains a small talk client and server, so that Alice and B
 oc_paganini_server.go allows you to post to Usenet anonymously, with oc_client.go, via the Paganini Newsserver's .onion URL.  
 This results in 6 hops, instead of 3.
 
-oc_m2n_server.go allows you to send messages to Usenet via Dizum's mail2news Gateway.
+oc_m2n_server.go allows you to send messages anonymously to Usenet via Dizum's mail2news Gateway.
 
 If you like the idea of point to point communication, without third-party
 servers involved, consider a donation to the following Bitcoin address:
