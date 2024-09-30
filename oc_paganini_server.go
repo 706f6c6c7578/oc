@@ -104,7 +104,7 @@ func sendArticle(reader io.Reader) (string, error) {
 
 	// Send POST command
 	fmt.Fprintf(conn, "POST\r\n")
-	sessionLog.WriteString("OnionC: POST\r\n")
+	sessionLog.WriteString("OCServ: POST\r\n")
 	response, err = bufReader.ReadString('\n')
 	if err != nil {
 		return "", fmt.Errorf("error reading the POST response: %v", err)
@@ -116,7 +116,7 @@ func sendArticle(reader io.Reader) (string, error) {
 	}
 
 	// Read and send articles from the reader
-	sessionLog.WriteString("OnionC: [Article content not logged]\n")
+	sessionLog.WriteString("OCServ: [Article content not logged]\n")
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -129,7 +129,7 @@ func sendArticle(reader io.Reader) (string, error) {
 
 	// Send end of article
 	fmt.Fprintf(conn, ".\r\n")
-	sessionLog.WriteString("OnionC: .\r\n")
+	sessionLog.WriteString("OCServ: .\r\n")
 
 	// Read response from the server
 	response, err = bufReader.ReadString('\n')
@@ -140,7 +140,7 @@ func sendArticle(reader io.Reader) (string, error) {
 
 	// Send QUIT command
 	fmt.Fprintf(conn, "QUIT\r\n")
-	sessionLog.WriteString("OnionC: QUIT\r\n")
+	sessionLog.WriteString("OCServ: QUIT\r\n")
 
 	// Read the final server response
 	finalResponse, err := ioutil.ReadAll(bufReader)
