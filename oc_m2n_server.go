@@ -145,7 +145,7 @@ func sendMail(message []byte) (string, error) {
 	sessionLog.WriteString("QUIT command sent\n")
 
 	fmt.Println("Message sent and not stored.")
-	sessionLog.WriteString("Data not stored nor logged by onion mail2news proxy.")
+	sessionLog.WriteString("Data not stored nor log files are written, by onion mail2news proxy.")
 
 	return sessionLog.String(), nil
 }
