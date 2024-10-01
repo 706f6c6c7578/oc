@@ -116,7 +116,7 @@ func sendArticle(reader io.Reader) (string, error) {
 	}
 
 	// Read and send articles from the reader
-	sessionLog.WriteString("OCServ: Data not stored nor logged by Usenet Onion Gateway.\n")
+	sessionLog.WriteString("OCServ: Data not stored nor logged by Usenet onion proxy.\n")
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		line := scanner.Text()
