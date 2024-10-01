@@ -116,7 +116,7 @@ func sendArticle(reader io.Reader) (string, error) {
 	}
 
 	// Read and send articles from the reader
-	sessionLog.WriteString("OCServ: Your article will not been stored on this Onion Courier Server.]\n")
+	sessionLog.WriteString("OCServ: Article not stored by Onion Courier.\nNo log files are used.]\n")
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		line := scanner.Text()
