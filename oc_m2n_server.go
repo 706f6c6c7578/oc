@@ -9,9 +9,7 @@ import (
 	"net"
 	"net/http"
 	"net/smtp"
-	"os"
-	"time"
-
+	
 	"golang.org/x/net/proxy"
 )
 
@@ -62,14 +60,6 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Error sending mail: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
-
-	// Output to stderr with timestamp and username (if provided)
-	currentTime := time.Now().Format("15:04:05")
-	username := r.Header.Get("X-Username")
-	if username == "" {
-		username = "Anonymous"
-	}
-	fmt.Fprintf(os.Stderr, "File %s received at %s by %s\n", header.Filename, currentTime, username)
 
 	// Output to the client
 	fmt.Fprintf(w, "File %s received and sent!\n\nSMTP Session Log:\n%s", header.Filename, sessionLog)
@@ -144,7 +134,6 @@ func sendMail(message []byte) (string, error) {
 	c.Quit()
 	sessionLog.WriteString("QUIT command sent\n")
 
-	fmt.Println("Message sent and not stored.")
 	sessionLog.WriteString("No data stored nor log files are written, by mail2news onion proxy.")
 
 	return sessionLog.String(), nil
