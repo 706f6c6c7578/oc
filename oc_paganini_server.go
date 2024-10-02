@@ -8,9 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"strings"
-	"time"
 
 	"golang.org/x/net/proxy"
 )
