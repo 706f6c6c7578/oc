@@ -66,14 +66,6 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Output to stderr with timestamp and username (if provided)
-	currentTime := time.Now().Format("15:04:05")
-	username := r.Header.Get("X-Username")
-	if username == "" {
-		username = "Anonymous"
-	}
-	fmt.Fprintf(os.Stderr, "File %s received at %s by %s\n", header.Filename, currentTime, username)
-
 	// Output to the client
 	fmt.Fprintf(w, "File %s received and sent!\n\nNNTP Session Log:\n%s", header.Filename, sessionLog)
 }
