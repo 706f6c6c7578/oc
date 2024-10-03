@@ -146,7 +146,7 @@ Example Usenet message:
 
 X-OC-To: utxloshiyxfxl7qxvcfglu4lscetfrxvagqqsaarl6kz2oxkoyp3tbid.onion:8081 secretPassword
 
-From: Stefan Claas <pollux@tilde.club>  
+From: Bob <bob@example.org>  
 Subject: Onion Courier Middleman Test  
 Newsgroups: alt.test
 
@@ -154,7 +154,7 @@ Hello World! :-)
 
 --   
 Regards  
-Stefan
+Bob
 
 If you like the idea of point to point communication, without third-party
 servers involved, consider a donation to the following Bitcoin address:
