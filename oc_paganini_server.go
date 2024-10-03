@@ -65,7 +65,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Output to the client
-	fmt.Fprintf(w, "File %s received and sent!\n\nNNTP Session Log:\n%s", header.Filename, sessionLog)
+	fmt.Fprintf(w, "File received and sent!\n\nNNTP Session Log:\n%s", header.Filename, sessionLog)
 }
 
 func sendArticle(reader io.Reader) (string, error) {
@@ -106,7 +106,7 @@ func sendArticle(reader io.Reader) (string, error) {
 	}
 
 	// Read and send articles from the reader
-	sessionLog.WriteString("OCServ: No data stored nor log files are written by Usenet onion proxy.\n")
+	sessionLog.WriteString("OCServ: No data stored nor log files are written by this server.\n")
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
 		line := scanner.Text()

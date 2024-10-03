@@ -62,7 +62,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Output to the client
-	fmt.Fprintf(w, "File %s received and sent!\n\nSMTP Session Log:\n%s", header.Filename, sessionLog)
+	fmt.Fprintf(w, "File received and sent!\n\nSMTP Session Log:\n%s", header.Filename, sessionLog)
 }
 
 func sendMail(message []byte) (string, error) {
@@ -134,7 +134,7 @@ func sendMail(message []byte) (string, error) {
 	c.Quit()
 	sessionLog.WriteString("QUIT command sent\n")
 
-	sessionLog.WriteString("No data stored nor log files are written, by mail2news onion proxy.")
+	sessionLog.WriteString("No data stored nor log files are written by this server.")
 
 	return sessionLog.String(), nil
 }
