@@ -153,7 +153,7 @@ Newsgroups: alt.test
 Hello World! :-)
 
 --   
-Regards
+Regards  
 Stefan
 
 If you like the idea of point to point communication, without third-party
