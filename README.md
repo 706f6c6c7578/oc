@@ -146,8 +146,8 @@ Example Usenet message:
 
 X-OC-To: utxloshiyxfxl7qxvcfglu4lscetfrxvagqqsaarl6kz2oxkoyp3tbid.onion:8081 secretPassword
 
-From: Stefan Claas <pollux@tilde.club>
-Subject: Onion Courier Middleman Test
+From: Stefan Claas <pollux@tilde.club>  
+Subject: Onion Courier Middleman Test  
 Newsgroups: alt.test
 
 Hello World! :-)
