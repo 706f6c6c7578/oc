@@ -152,7 +152,7 @@ Newsgroups: alt.test
 
 Hello World! :-)
 
--- 
+--   
 Regards
 Stefan
 
