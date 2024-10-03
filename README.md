@@ -139,6 +139,23 @@ This results in 6 hops, instead of 3.
 oc_m2n_server.go allows you to send messages anonymously to Usenet via Dizum's mail2news Gateway.  
 This results in 6 hops, instead of 3.
 
+oc_middleman_server.go is a middleman server which can be optionally used to send files thtough nine hops.  
+It needs a special file format, containing an X-OC-To: header.  
+
+Example Usenet message:
+
+X-OC-To: utxloshiyxfxl7qxvcfglu4lscetfrxvagqqsaarl6kz2oxkoyp3tbid.onion:8081 secretPassword
+
+From: Stefan Claas <pollux@tilde.club>
+Subject: Onion Courier Middleman Test
+Newsgroups: alt.test
+
+Hello World! :-)
+
+-- 
+Regards
+Stefan
+
 If you like the idea of point to point communication, without third-party
 servers involved, consider a donation to the following Bitcoin address:
 
