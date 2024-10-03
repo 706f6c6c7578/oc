@@ -35,7 +35,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid password", http.StatusUnauthorized)
 		return
 	}
-	file, header, err := r.FormFile("file")
+	file, _, err := r.FormFile("file")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -65,7 +65,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Output to the client
-	fmt.Fprintf(w, "File received and sent!\n\nNNTP Session Log:\n%s", header.Filename, sessionLog)
+	fmt.Fprintf(w, "File received and sent!\n\nNNTP Session Log:\n%s", sessionLog)
 }
 
 func sendArticle(reader io.Reader) (string, error) {
