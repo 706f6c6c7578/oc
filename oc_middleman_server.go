@@ -58,6 +58,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	onionAddress := headerParts[1]
 	password := strings.TrimSpace(headerParts[2])
 	messageBody := strings.Join(lines[2:], "\n")
+	nickname := "server's nickname"
 
 	response, err := sendToOnionAddress([]byte(messageBody), onionAddress, password)
         if err != nil {
@@ -70,12 +71,12 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 
     responseMsg := "\n============================\n"
     responseMsg += "File received and sent by:\n%s\n"
-    responseMsg += "No data stored nor log files are written by this server.\n\n"
+    responseMsg += "No data is stored or logged by Onion Courier %s.\n\n"
     responseMsg += "Target Onion Courier Response:\n%s\n"
     responseMsg += "============================\n"
     responseMsg += "%s"
 
-    fmt.Fprintf(w, responseMsg, middlemanOnionURL, onionAddress, response)
+    fmt.Fprintf(w, responseMsg, middlemanOnionURL, nickname, onionAddress, response)
 }
 
 func sendToOnionAddress(message []byte, onionAddress, password string) (string, error) {

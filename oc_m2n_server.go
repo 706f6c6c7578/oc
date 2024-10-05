@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
 	"crypto/tls"
 	"fmt"
@@ -14,6 +15,7 @@ import (
 )
 
 const (
+	nickname = "server's nickname"
 	password = "secretPassword" // Set your desired password here
 	from     = "onion@onion.onion"
 	to       = "mail2news@dizum.com"
@@ -135,7 +137,14 @@ func sendMail(message []byte) (string, error) {
 	c.Quit()
 	sessionLog.WriteString("QUIT command sent\n")
 
-	sessionLog.WriteString("No data stored nor log files are written by this server.")
+	// Read and send articles from the reader
+	reader := bufio.NewReader(conn)
+	fmt.Fprintf(&sessionLog, "No data is stored or logged by Onion Courier %s.\n", nickname)
+    	scanner := bufio.NewScanner(reader)
+    	for scanner.Scan() {
+            line := scanner.Text()
+            fmt.Fprintf(conn, "%s\r\n", line)
+        }
 
 	return sessionLog.String(), nil
 }

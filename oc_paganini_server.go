@@ -14,6 +14,7 @@ import (
 )
 
 const (
+	nickname = "server's nickname"
 	password = "secretPassword" // Set your desired password here
 	server   = "bofhteamhroxbmd6pxbjrg6egqrnnu2vj7vlxpcnb3ypk56devuyj6yd.onion:119" // Replace this with your NNTP server and port
 	torProxy = "127.0.0.1:9050" // Default Tor SOCKS proxy address
@@ -106,12 +107,12 @@ func sendArticle(reader io.Reader) (string, error) {
 	}
 
 	// Read and send articles from the reader
-	sessionLog.WriteString("OCServ: No data stored nor log files are written by this server.\n")
-	scanner := bufio.NewScanner(reader)
-	for scanner.Scan() {
-		line := scanner.Text()
-		fmt.Fprintf(conn, "%s\r\n", line)
-	}
+	fmt.Fprintf(&sessionLog, "OCServ: No data is stored or logged by Onion Courier %s.\n", nickname)
+    	scanner := bufio.NewScanner(reader)
+    	for scanner.Scan() {
+            line := scanner.Text()
+            fmt.Fprintf(conn, "%s\r\n", line)
+        }
 
 	if err := scanner.Err(); err != nil {
 		return "", fmt.Errorf("error reading the input: %v", err)
