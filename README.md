@@ -139,7 +139,7 @@ This results in 6 hops, instead of 3.
 oc_m2n_server.go allows you to send messages anonymously to Usenet via Dizum's mail2news Gateway.  
 This results in 6 hops, instead of 3.
 
-oc_middleman_server.go is a middleman server which can be optionally used to send files thtough nine hops.  
+oc_middleman_server.go is a middleman server which can be optionally used to send files through nine hops.  
 It needs a special file format, containing an X-OC-To: header. Multiple middleman hops are supported by  
 adding additional X-OC-To headers.
 
