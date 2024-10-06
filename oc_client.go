@@ -145,7 +145,7 @@ func uploadFile(serverURL, password, username, filename string, useTor bool) err
 		request.Header.Set("X-Username", username)
 	}
 
-	fmt.Print("Send file...")
+	fmt.Print("Send file...\n")
 
 	response, err := client.Do(request)
 	if err != nil {
