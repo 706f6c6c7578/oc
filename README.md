@@ -162,5 +162,9 @@ servers involved, consider a donation to the following Bitcoin address:
 
 bc1qhgek8p5qcwz7r6502y8tvenkpsw9w5yafhatxk
 
+or Monero address:
+
+45TJx8ZHngM4GuNfYxRw7R7vRyFgfMVp862JqycMrPmyfTfJAYcQGEzT27wL1z5RG1b5XfRPJk97KeZr1svK8qES2z1uZrS
+
 This project is dedicated to Alice and Bob.
 
