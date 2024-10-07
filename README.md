@@ -145,7 +145,7 @@ adding additional X-OC-To headers.
 
 Example Usenet message:
 
-X-OC-To: utxloshiyxfxl7qxvcfglu4lscetfrxvagqqsaarl6kz2oxkoyp3tbid.onion:8081 secretPassword
+X-OC-To: utxloshiyxfxl7qxvcfglu4lscetfrxvagqqsaarl6kz2oxkoyp3tbid.onion:8081 secretPassword  
 From: Bob <bob@example.org>  
 Subject: Onion Courier Middleman Test  
 Newsgroups: alt.test
