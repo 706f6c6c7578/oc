@@ -133,7 +133,7 @@ HiddenServicePort 8084 127.0.0.1:8084
 
 The minitalk folder contains a small talk client and server, so that Alice and Bob can talk to each other.
 
-öc_crypt is a small encryption / decryption program, allowing you to encrypt your oc_client messages, prior sending.  
+oc_crypt is a small encryption / decryption program, allowing you to encrypt your oc_client messages, prior sending.  
 
 oc_paganini_server.go allows you to post to Usenet anonymously, with oc_client.go, via the Paganini Newsserver's .onion URL.  
 This results in 6 hops, instead of 3.
