@@ -156,7 +156,8 @@ Hello World! :-)
 Regards  
 Bob
 
-oc_guard_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior to it sends to middlemen.  A news -h (hide server response) parameter was  added to oc_client.go, so that  
+oc_guard_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior to it sends to middlemen.  
+A news -h (hide server response) parameter was  added to oc_client.go, so that  
 users with a live system like Tails can hide the data travelling paths.
 
 If you like the idea of point to point communication, without third-party
