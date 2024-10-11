@@ -131,7 +131,7 @@ HiddenServicePort 8082 127.0.0.1:8082
 HiddenServicePort 8083 127.0.0.1:8083  
 HiddenServicePort 8084 127.0.0.1:8084  
 
-## mintalk
+## minitalk
 
 The minitalk folder contains a small talk client and server, so that Alice and Bob can talk to each other.
 
@@ -164,7 +164,7 @@ Hello World! :-)
 Regards  
 Bob
 
-## oc_guard_srver.go
+## oc_guard_server.go
 
 oc_guard_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior to it sends to middlemen.  
 A new -h (hide server response) parameter was  added to oc_client.go, so that  
