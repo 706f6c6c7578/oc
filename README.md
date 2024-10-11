@@ -170,6 +170,8 @@ oc_guard_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) t
 A new -h (hide server response) parameter was  added to oc_client.go, so that  
 users with a live system like Tails can hide the data travelling paths.
 
+## Closing words
+
 If you like the idea of point to point communication, without third-party
 servers involved, consider a donation to the following Bitcoin address:
 
