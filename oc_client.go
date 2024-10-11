@@ -51,7 +51,7 @@ func main() {
 	} else {
 		args := flag.Args()
 		if len(args) != 2 {
-			fmt.Println("Usage: oc [-u username] [-d datafile] [-clearnet] [-h] -f <filename> <server_address:port> <password>")
+			fmt.Println("Usage: oc [-u username] [-d datafile] [-clearnet] [-h hide server response] \n          -f <filename> <server_address:port> <password>")
 			os.Exit(1)
 		}
 		serverAddress, password := args[0], args[1]
