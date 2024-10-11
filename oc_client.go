@@ -21,10 +21,12 @@ func main() {
 	var dataFile string
 	var useClearnet bool
 	var filename string
+	var hideResponse bool
 	flag.StringVar(&username, "u", "", "Optional username")
 	flag.StringVar(&dataFile, "d", "", "File containing server addresses, ports, and passwords")
 	flag.BoolVar(&useClearnet, "clearnet", false, "Use clearnet instead of Tor")
 	flag.StringVar(&filename, "f", "", "File to upload")
+	flag.BoolVar(&hideResponse, "h", false, "Hide server response")
 	flag.Parse()
 
 	var err error
@@ -41,7 +43,7 @@ func main() {
 				serverAddress = "http://" + serverAddress
 			}
 			serverURL := serverAddress + "/upload"
-			err = uploadFile(serverURL, password, username, filename, !useClearnet)
+			err = uploadFile(serverURL, password, username, filename, !useClearnet, hideResponse)
 			if err != nil {
 				fmt.Printf("\nError uploading file to %s: %v\n", serverAddress, err)
 			}
@@ -49,7 +51,7 @@ func main() {
 	} else {
 		args := flag.Args()
 		if len(args) != 2 {
-			fmt.Println("Usage: oc [-u username] [-d datafile] [-clearnet] -f <filename> <server_address:port> <password>")
+			fmt.Println("Usage: oc [-u username] [-d datafile] [-clearnet] [-h] -f <filename> <server_address:port> <password>")
 			os.Exit(1)
 		}
 		serverAddress, password := args[0], args[1]
@@ -57,7 +59,7 @@ func main() {
 			serverAddress = "http://" + serverAddress
 		}
 		serverURL := serverAddress + "/upload"
-		err = uploadFile(serverURL, password, username, filename, !useClearnet)
+		err = uploadFile(serverURL, password, username, filename, !useClearnet, hideResponse)
 		if err != nil {
 			fmt.Printf("\nError uploading file: %v\n", err)
 			os.Exit(1)
@@ -94,7 +96,7 @@ func readDataFile(filename string) ([][]string, error) {
 	return addresses, nil
 }
 
-func uploadFile(serverURL, password, username, filename string, useTor bool) error {
+func uploadFile(serverURL, password, username, filename string, useTor, hideResponse bool) error {
 	file, err := os.Open(filename)
 	if err != nil {
 		return fmt.Errorf("failed to open file: %w", err)
@@ -158,14 +160,17 @@ func uploadFile(serverURL, password, username, filename string, useTor bool) err
 		return fmt.Errorf("unexpected status: %s, body: %s", response.Status, string(bodyBytes))
 	}
 
-	responseBody, err := io.ReadAll(response.Body)
-	if err != nil {
-		return fmt.Errorf("failed to read response body: %w", err)
+	elapsedTime := time.Since(startTime)
+	fmt.Printf("\nFile sent successfully. Total time: %s\n", formatDuration(elapsedTime))
+
+	if !hideResponse {
+		responseBody, err := io.ReadAll(response.Body)
+		if err != nil {
+			return fmt.Errorf("failed to read response body: %w", err)
+		}
+		fmt.Println("Server response:", string(responseBody))
 	}
 
-	elapsedTime := time.Since(startTime)
-	fmt.Printf("\nFile sent succesfully. Total time: %s\n", formatDuration(elapsedTime))
-	fmt.Println("Server response:", string(responseBody))
 	return nil
 }
 
