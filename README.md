@@ -131,13 +131,21 @@ HiddenServicePort 8082 127.0.0.1:8082
 HiddenServicePort 8083 127.0.0.1:8083  
 HiddenServicePort 8084 127.0.0.1:8084  
 
+## mintalk
+
 The minitalk folder contains a small talk client and server, so that Alice and Bob can talk to each other.
+
+## oc_paganini_server.go
 
 oc_paganini_server.go allows you to post to Usenet anonymously, with oc_client.go, via the Paganini Newsserver's .onion URL.  
 This results in 6 hops, instead of 3.
 
+## oc_m2n_server.go
+
 oc_m2n_server.go allows you to send messages anonymously to Usenet via Dizum's mail2news Gateway.  
 This results in 6 hops, instead of 3.
+
+## oc_middleman_server.go
 
 oc_middleman_server.go is a middleman server which can be optionally used to send files through nine hops.  
 It needs a special file format, containing an X-OC-To: header. Multiple middleman hops are supported by  
@@ -155,6 +163,8 @@ Hello World! :-)
 --   
 Regards  
 Bob
+
+## oc_guard_srver.go
 
 oc_guard_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior to it sends to middlemen.  
 A new -h (hide server response) parameter was  added to oc_client.go, so that  
