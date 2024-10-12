@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	nickname = "Louie"
+	nickname = "server's nckname"
 	password = "secretPassword" // Set your desired password here
 	from     = "Onion Courier <noreply@your.domain.org>"
 	host     = "smtp.your.domain.org"
