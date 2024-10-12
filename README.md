@@ -170,6 +170,10 @@ oc_guard_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) t
 A new -h (hide server response) parameter was  added to oc_client.go, so that  
 users with a live system like Tails can hide the data travelling paths.
 
+## oc_email_server.go
+
+oc_email_server.go uses your VPS MTA, which should have a whitelist defined, for reachable email domains.
+
 ## Closing words
 
 If you like the idea of point to point communication, without third-party
