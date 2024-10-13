@@ -22,7 +22,10 @@ import (
 	"golang.org/x/net/proxy"
 )
 
-const serverPassword = "secretPassword" // Set your desired server password here
+const (
+	serverPassword = "secretPassword" // Set your desired server password here
+	maxFileSize    = 28 * 1024        // 28 KB in bytes
+)
 
 var privateKeyPath string
 
@@ -51,9 +54,11 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err := r.ParseMultipartForm(10 << 20) // 10 MB max
+	// Limit the request body size to maxFileSize
+	r.Body = http.MaxBytesReader(w, r.Body, maxFileSize)
+	err := r.ParseMultipartForm(maxFileSize)
 	if err != nil {
-		http.Error(w, "Error parsing multipart form", http.StatusBadRequest)
+		http.Error(w, "File too large or error parsing form", http.StatusBadRequest)
 		return
 	}
 
@@ -64,9 +69,14 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 
-	content, err := ioutil.ReadAll(file)
+	content, err := io.ReadAll(file)
 	if err != nil {
 		http.Error(w, "Error reading file content", http.StatusInternalServerError)
+		return
+	}
+
+	if len(content) > maxFileSize {
+		http.Error(w, "File too large", http.StatusBadRequest)
 		return
 	}
 
@@ -114,8 +124,8 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	guardOnionURL := "yourURL.onion:8084" // Replace with your actual Guard Onion URL.
-	nickname := "server's nickname" // Replace with your actual server's nickname
+	guardOnionURL := "w7t3g7oo5naebqwlezshgkgczttjn7x3re3farrzwa6bttvbnm5fcsad.onion:8084" // Replace with your actual Guard Onion URL.
+	nickname := "Bobby" // Replace with your actual server's nickname
 
 	responseMsg := "\n============================\n"
 	responseMsg += "File received, decrypted and sent by:\n%s\n"
