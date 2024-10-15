@@ -149,7 +149,7 @@ This results in 6 hops, instead of 3.
 
 oc_middleman_server.go is a middleman server which can be optionally used to send files through nine hops.  
 It needs a special file format, containing an X-OC-To: header. Multiple middleman hops are supported by  
-adding additional X-OC-To headers.
+adding additional X-OC-To headers. The accepted message size for a Guard is limited to 42 KB.
 
 Example Usenet message:
 
@@ -166,7 +166,7 @@ Bob
 
 ## oc_guard_server.go
 
-oc_guard_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior it sends it to middlemen.    The accepted message size for a Guard is limited to 28 KB.    
+oc_guard_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior it sends it to middlemen.    The accepted message size for a Guard is limited to 42 KB.    
 A new -h (hide server response) parameter was  added to oc_client.go, so that  
 users with a live system like Tails can hide the data travelling paths.
 
