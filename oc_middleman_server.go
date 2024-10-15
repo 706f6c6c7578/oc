@@ -12,7 +12,10 @@ import (
 	"golang.org/x/net/proxy"
 )
 
-const serverPassword = "secretPassword" // Set your desired server password here
+const (
+	serverPassword = "secretPassword" // Set your desired server password here
+	maxFileSize    = 42 * 1024        // 42 KB in bytes
+)
 
 func main() {
 	http.HandleFunc("/upload", handleUpload)
@@ -32,9 +35,11 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err := r.ParseMultipartForm(10 << 20) // 10 MB max
+	// Limit the request body size to maxFileSize
+	r.Body = http.MaxBytesReader(w, r.Body, maxFileSize)
+	err := r.ParseMultipartForm(maxFileSize)
 	if err != nil {
-		http.Error(w, "Error parsing multipart form", http.StatusBadRequest)
+		http.Error(w, "File too large or error parsing form", http.StatusBadRequest)
 		return
 	}
 
@@ -48,6 +53,11 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	content, err := ioutil.ReadAll(file)
 	if err != nil {
 		http.Error(w, "Error reading file content", http.StatusInternalServerError)
+		return
+	}
+
+	if len(content) > maxFileSize {
+		http.Error(w, "Maximun allowed message size 40 KB!", http.StatusBadRequest)
 		return
 	}
 
@@ -87,8 +97,8 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	middlemanOnionURL := "your_onion_url:8085" // Replace with your actual middleman Onion URL.
-	nickname := "server's nickname" // Replace with your actual server's nickname
+	middlemanOnionURL := "uxs6qfcbzmntsdj5nenktp7ykgov7kgi6amjqxu3vxf7lgqdibg4efid.onion:8085" // Replace with your actual middleman Onion URL.
+	nickname := "Iria" // Replace with your actual server's nickname
 
 	responseMsg := "\n============================\n"
 	responseMsg += "File received and sent by:\n%s\n"
