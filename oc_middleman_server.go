@@ -57,7 +57,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if len(content) > maxFileSize {
-		http.Error(w, "Maximun allowed message size 40 KB!", http.StatusBadRequest)
+		http.Error(w, "Maximun allowed message size 42 KB!", http.StatusBadRequest)
 		return
 	}
 
