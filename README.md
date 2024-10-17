@@ -133,10 +133,6 @@ HiddenServicePort 8082 127.0.0.1:8082
 HiddenServicePort 8083 127.0.0.1:8083  
 HiddenServicePort 8084 127.0.0.1:8084  
 
-## minitalk
-
-The minitalk folder contains a small talk client and server, so that Alice and Bob can talk to each other.
-
 ## oc_paganini_server.go
 
 oc_paganini_server.go allows you to post to Usenet anonymously, with oc_client.go, via the Paganini Newsserver's .onion URL.  
