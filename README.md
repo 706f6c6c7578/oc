@@ -54,7 +54,7 @@ Please note:  The last entry in your data_file must be a single LF or CRLF and n
 - `[-clearnet`]: Use clearnet instead of Tor network
 - `-f <filename>`: Specify the filename to be send, which is used on the server
 - `-d <data_file>`: Use a data file containing server address:port and password
-- - `[-h`}: Hide server response
+- `[-h`}: Hide server response
 
 ## Examples
 
