@@ -10,6 +10,7 @@ It supports various options for flexibility and ease of use.
 - Send data through Tor network (default) or clearnet
 - Optional username support
 - Use of a data file for server address:port and password
+- Optional -h parameter to hide server response
 
 ## Requirements
 
