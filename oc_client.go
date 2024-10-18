@@ -168,7 +168,7 @@ func uploadFile(serverURL, password, username, filename string, useTor, hideResp
 		if err != nil {
 			return fmt.Errorf("failed to read response body: %w", err)
 		}
-		fmt.Println("Target Onion Courier Response:", string(responseBody))
+		fmt.Println("Onion Courier Response:", string(responseBody))
 	}
 
 	return nil
