@@ -166,7 +166,10 @@ Bob
 
 oc_guard_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior it sends it to middlemen.    The accepted message size for a Guard is limited to 42 KB.    
 A new -h (hide server response) parameter was  added to oc_client.go, so that  
-users can hide the server response.
+users can hide the server response.  
+Why and when should you use a Guard node as first hop?  
+In case you are not sure if your online computer is monitored by spyware.  
+You simply create your messages on an offline computer and encrypt your payload with minicrypt.
 
 ## oc_email_server.go
 
