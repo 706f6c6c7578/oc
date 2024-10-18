@@ -161,14 +161,14 @@ func uploadFile(serverURL, password, username, filename string, useTor, hideResp
 	}
 
 	elapsedTime := time.Since(startTime)
-	fmt.Printf("\nFile sent successfully. Total time: %s\n", formatDuration(elapsedTime))
+	fmt.Printf("\nFile sent successfully. Total time: %s\n\n", formatDuration(elapsedTime))
 
 	if !hideResponse {
 		responseBody, err := io.ReadAll(response.Body)
 		if err != nil {
 			return fmt.Errorf("failed to read response body: %w", err)
 		}
-		fmt.Println("Server response:", string(responseBody))
+		fmt.Println("Target Onion Courier Response:", string(responseBody))
 	}
 
 	return nil
