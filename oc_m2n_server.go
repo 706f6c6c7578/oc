@@ -1,8 +1,6 @@
 package main
 
 import (
-	"bufio"
-	"bytes"
 	"crypto/tls"
 	"fmt"
 	"io/ioutil"
@@ -15,7 +13,6 @@ import (
 )
 
 const (
-	nickname = "server's nickname"
 	password = "secretPassword" // Set your desired password here
 	from     = "onion@onion.onion"
 	to       = "mail2news@dizum.com"
@@ -55,8 +52,8 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Send the content via email and get the session log
-	sessionLog, err := sendMail(content)
+	// Send the content via email
+	err = sendMail(content)
 	if err != nil {
 		log.Println("Error sending mail:", err)
 		http.Error(w, "Error sending mail: "+err.Error(), http.StatusInternalServerError)
@@ -64,17 +61,14 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Output to the client
-	fmt.Fprintf(w, "File received and sent!\n\nSMTP Session Log:\n%s", sessionLog)
+	fmt.Fprintf(w, "File received and sent.\nNo data is stored or logged by Onion Courier.")
 }
 
-
-func sendMail(message []byte) (string, error) {
-	var sessionLog bytes.Buffer
-
+func sendMail(message []byte) error {
 	// Create a SOCKS5 dialer
 	dialer, err := proxy.SOCKS5("tcp", torProxy, nil, proxy.Direct)
 	if err != nil {
-		return "", fmt.Errorf("error creating SOCKS5 dialer: %v", err)
+		return fmt.Errorf("error creating SOCKS5 dialer: %v", err)
 	}
 
 	// Create a custom dialer function
@@ -90,61 +84,43 @@ func sendMail(message []byte) (string, error) {
 	// Connect to the server using the custom dialer
 	conn, err := customDialer("tcp", host+":"+port)
 	if err != nil {
-		return "", fmt.Errorf("error connecting to server: %v", err)
+		return fmt.Errorf("error connecting to server: %v", err)
 	}
 
 	c, err := smtp.NewClient(conn, host)
 	if err != nil {
-		return "", fmt.Errorf("error creating SMTP client: %v", err)
+		return fmt.Errorf("error creating SMTP client: %v", err)
 	}
-
-	sessionLog.WriteString("Connected to SMTP server smtp.dizum.com\n")
 
 	err = c.StartTLS(tlsConfig)
 	if err != nil {
-		return "", fmt.Errorf("error starting TLS: %v", err)
+		return fmt.Errorf("error starting TLS: %v", err)
 	}
-	sessionLog.WriteString("TLS started\n")
 
 	if err = c.Mail(from); err != nil {
-		return "", fmt.Errorf("error Mail: %v", err)
+		return fmt.Errorf("error Mail: %v", err)
 	}
-	sessionLog.WriteString(fmt.Sprintf("From: %s\n", from))
 
 	if err = c.Rcpt(to); err != nil {
-		return "", fmt.Errorf("error Rcpt: %v", err)
+		return fmt.Errorf("error Rcpt: %v", err)
 	}
-	sessionLog.WriteString(fmt.Sprintf("To: %s\n", to))
 
 	w, err := c.Data()
 	if err != nil {
-		return "", fmt.Errorf("error Data: %v", err)
+		return fmt.Errorf("error Data: %v", err)
 	}
-	sessionLog.WriteString("Data command sent\n")
 
 	_, err = w.Write(message)
 	if err != nil {
-		return "", fmt.Errorf("error Write: %v", err)
+		return fmt.Errorf("error Write: %v", err)
 	}
-	sessionLog.WriteString("Message body sent\n")
 
 	err = w.Close()
 	if err != nil {
-		return "", fmt.Errorf("error Close: %v", err)
+		return fmt.Errorf("error Close: %v", err)
 	}
-	sessionLog.WriteString("Message body closed\n")
 
 	c.Quit()
-	sessionLog.WriteString("QUIT command sent\n")
 
-	// Read and send articles from the reader
-	reader := bufio.NewReader(conn)
-	fmt.Fprintf(&sessionLog, "No data is stored or logged by Onion Courier %s.\n", nickname)
-    	scanner := bufio.NewScanner(reader)
-    	for scanner.Scan() {
-            line := scanner.Text()
-            fmt.Fprintf(conn, "%s\r\n", line)
-        }
-
-	return sessionLog.String(), nil
+	return nil
 }
