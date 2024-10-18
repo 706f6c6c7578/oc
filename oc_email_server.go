@@ -76,7 +76,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Output to the client
-	fmt.Fprintf(w, "File received and sent.\nNo data is stored or logged by Onion Courier.")
+	fmt.Fprintf(w, "File received and sent.\nNo data is stored or logged by Onion Courier.\n")
 }
 
 func extractToHeader(content []byte) (string, error) {
