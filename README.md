@@ -166,7 +166,7 @@ Bob
 
 oc_guard_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior it sends it to middlemen.    The accepted message size for a Guard is limited to 42 KB.    
 A new -h (hide server response) parameter was  added to oc_client.go, so that  
-users with a live system like Tails can hide the data travelling paths.
+users can hide the server response.
 
 ## oc_email_server.go
 
