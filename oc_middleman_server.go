@@ -99,7 +99,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 
     responseMsg := "File received and sent.\n"
     responseMsg += "No data is stored or logged by Onion Courier.\n\n"
-    responseMsg += "Target Onion Courier Response: %s\n"
+    responseMsg += "Onion Courier Response: %s\n"
 
     fmt.Fprintf(w, responseMsg, response)
 }
