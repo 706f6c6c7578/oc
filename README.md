@@ -169,7 +169,7 @@ A new -h (hide server response) parameter was  added to oc_client.go, so that
 users can hide the server response.  
 Why and when should you use a Guard node as first hop?  
 In case you are not sure if your online computer is monitored by spyware.  
-You simply create your messages on an offline computer and encrypt your payload with minicrypt.
+You simply create your messages on an offline computer and encrypt your payload with minicrypt, prior sending data with your online computer.
 
 ## oc_email_server.go
 
