@@ -88,8 +88,7 @@ $ oc_client -d server_data.txt -f myfile.txt
 
 ## Requirements
 
-- Tor Browser Bundle
-- `https://www.torproject.org/`
+- [Tor Browser Bundle](https://www.torproject.org/)
 
 ## Usage
 
