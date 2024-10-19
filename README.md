@@ -27,8 +27,7 @@ $ go build -ldflags "-s -w" oc_client.go
 $ go build -ldflags "-s -w" oc_client.go
 
 
-- Tor Expert Bundle
-- `https://www.torproject.org/download/tor/`
+- [Tor Expert Bundle](https://www.torproject.org/download/tor/)
 
 
 ## Usage
