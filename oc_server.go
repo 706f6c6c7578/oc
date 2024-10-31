@@ -12,16 +12,20 @@ import (
 	"time"
 )
 
-const password = "secretPassword" // Set your desired password here
+const defaultPassword = "secretPassword" // Default password
 
-var filePath string
+var (
+	filePath string
+	password string // Now a variable to store either default or overridden password
+)
 
 func init() {
 	flag.StringVar(&filePath, "p", "", "Path to save uploaded files")
+	flag.StringVar(&password, "o", defaultPassword, "Override default password")
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "Usage: %s -p <path>\n", os.Args[0])
-		fmt.Fprintf(os.Stderr, "  -p <path>: Specify the path to save uploaded files (required)\n")
-		flag.PrintDefaults()
+		fmt.Fprintf(os.Stderr, "Usage: %s -p <path> [-o <password>]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "  -p <path>    : Specify the path to save uploaded files (required)\n")
+		fmt.Fprintf(os.Stderr, "  -o <password>: Set custom password for this session (optional)\n")
 	}
 	flag.Parse()
 
