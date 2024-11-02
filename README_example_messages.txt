@@ -1,6 +1,6 @@
 ## A message from Alice to Bob
 
-$ oc_client -d data.txt -f msg.txt
+$ oc_client -u Alice -d data.txt -f msg.txt
 
 where data.txt contains the onionURL,
 port and password, in the following format:
