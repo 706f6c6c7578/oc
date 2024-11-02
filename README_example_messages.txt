@@ -11,6 +11,7 @@ a format error appears)
 
 ## A message to the Usenet Group alt.test
 
+To: mail2news@dizum.com
 Subject: Test
 Newsgroups: alt.test
 MIME-Version: 1.0
@@ -21,6 +22,7 @@ Hello world!
 
 ## A reply message to the above Usenet posting
 
+To: mail2news@dizum.com
 Subject: Re: Test
 References: <Message-ID of original posting>
 Newsgroups: alt.test
