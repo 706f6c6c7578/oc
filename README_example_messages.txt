@@ -11,6 +11,8 @@ a format error appears)
 
 ## A message to the Usenet Group alt.test
 
+data.txt contains the mailer data.
+
 To: mail2news@dizum.com
 Subject: Test
 Newsgroups: alt.test
@@ -43,6 +45,7 @@ The message then needs a prepended header
 of the middleman.
 
 X-OC-To: onionURl:port password of middleman
+X-OC-To: onionURL:port password of mailer
 To: bob@example.org
 Subject: Hello
 
