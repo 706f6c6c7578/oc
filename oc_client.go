@@ -68,32 +68,49 @@ func main() {
 }
 
 func readDataFile(filename string) ([][]string, error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
+    file, err := os.Open(filename)
+    if err != nil {
+        return nil, err
+    }
+    defer file.Close()
 
-	var addresses [][]string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		line := scanner.Text()
-		if strings.HasPrefix(line, "#") {
-			continue // Skip comment lines
-		}
-		// Replace CRLF and LF with a single space
-		line = strings.ReplaceAll(line, "\r\n", " ")
-		line = strings.ReplaceAll(line, "\n", " ")
-		parts := strings.Fields(line)
-		if len(parts) != 2 {
-			return nil, fmt.Errorf("invalid data file format")
-		}
-		addresses = append(addresses, parts)
-	}
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-	return addresses, nil
+    var addresses [][]string
+    scanner := bufio.NewScanner(file)
+    for scanner.Scan() {
+        line := strings.TrimSpace(scanner.Text())
+        
+        // Skip empty lines and comments
+        if line == "" || strings.HasPrefix(line, "#") {
+            continue
+        }
+
+        // Split by whitespace and filter out empty strings
+        parts := strings.Fields(line)
+        
+        // Ensure we have exactly two non-empty parts
+        var validParts []string
+        for _, part := range parts {
+            if trimmed := strings.TrimSpace(part); trimmed != "" {
+                validParts = append(validParts, trimmed)
+            }
+        }
+
+        if len(validParts) != 2 {
+            continue // Skip invalid lines instead of returning error
+        }
+
+        addresses = append(addresses, validParts)
+    }
+
+    if err := scanner.Err(); err != nil {
+        return nil, err
+    }
+
+    if len(addresses) == 0 {
+        return nil, fmt.Errorf("no valid entries found in data file")
+    }
+
+    return addresses, nil
 }
 
 func uploadFile(serverURL, password, username, filename string, useTor, hideResponse bool) error {
