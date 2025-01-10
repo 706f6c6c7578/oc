@@ -18,7 +18,6 @@ mixmaster@remailer.paranoici.org
 senshiremailer@gmx.de
 mix@shalo.ca
 slowmix@mixmaster.mixmin.net
-mixmaster@tnetconsulting.net
 
 # YAMN REMAILERS
 nyam@remailer.frell.eu.org
@@ -28,7 +27,6 @@ yamn@middleman.remailer.online
 yamn@milton.redmv.net
 yamn@yamn.paranoici.org
 yamn@shalo.ca
-yamn@tnetconsulting.net
 yamn@virebent.art
 yamn@mixmin.net
 yamn2@mixmin.net
