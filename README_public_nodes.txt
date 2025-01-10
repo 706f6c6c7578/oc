@@ -43,6 +43,7 @@ send@nymph.paranoici.org
 
 # MAIL TO NEWS GATEWAYS
 mail2news@dizum.com
+mail2news_nospam@dizum.com
 mail2news@neodome.net
 
 # PRIVACY EMAIL PROVIDERS
@@ -64,6 +65,9 @@ runbox.com
 countermail.com
 kolabnow.com
 soverin.com
+bk.ru (mail.ru anonymizer domain)
+inbox.ru (mail.ru anonymizer domain)
+list.ru (mail.ru anonymizer domain)
 
 oc_middleman_server:
 yeffqiea4xtcu6woyab6z6bz4oehisfuzgtmk4e277bydq25p7nha7ad.onion:8082 onioncouriermiddleman
