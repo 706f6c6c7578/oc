@@ -18,7 +18,7 @@ import (
 
 const (
 	password = "secretPassword" // Set your desired password here
-	from     = "<noreply@your.domain>"
+	from     = "Onion Courier <noreply@your.domain>"
 	host     = "smtp.your.domain"
 	port     = "2525"
 	torProxy = "127.0.0.1:9050"
