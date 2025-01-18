@@ -1,0 +1,22 @@
+run Windows+R to put ocs.vbs in:
+
+C:\Users\yourname\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+
+ocs.vbs:
+
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.Run chr(34) & "C:\Users\yourname\path\to\ocs.bat" & Chr(34), 0
+Set WshShell = Nothing
+
+Put ocs.bat in the Location defined in ocs.vbs.
+
+ocs.bat:
+
+@echo off
+start /b "" "C:\Users\yourname\path\to\tor.exe" -f C:\Users\yourname\path\to\tor\torrc
+timeout /t 10 
+start /b "" "C:\Users\yourname\path\to\oc_server.exe" -p C:\Users\yourname\path\to\inbox\ -o yourpassword > "C:\Users\yourname\path\to\inbox\logfile.txt" 2>&1
+Exit
+
+This will automatically start tor.exe and oc_server.exe without any cmd.exe windows open and log to logfile.txt.
+
