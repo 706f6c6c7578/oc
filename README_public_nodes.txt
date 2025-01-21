@@ -83,7 +83,7 @@ If you run a public node and want it to be added
 on this list, post a message to the Usenet Group
 alt.privacy.anon-server
 
-Contact me via Onion Courier:
+You can ontact me via Onion Courier:
 
 Onion Courier Home Server Mon-Fri 15:00-21:00 UTC Sat-Sun 11:00-21:00 UTC
 ohpmsq5ypuw5nagt2jidfyq72jvgw3fdvq37txhnm5rfbhwuosftzuyd.onion:8080 inbox
