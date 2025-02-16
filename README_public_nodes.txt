@@ -51,6 +51,7 @@ mail2tor.com
 xmail.net
 mailbox.org
 mailfence.com
+onionmail.org
 posteo.de
 proton.me
 protonmail.ch
