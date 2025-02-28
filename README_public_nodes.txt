@@ -1,3 +1,6 @@
+oc_onionmail_server:
+pj4sv5fegh7jmc2ss33wouj72xmx57ywcxb3csg22y4tsm2jde2l2gid.onion:8083 onioncourier2onionmail
+
 oc_email_server:
 bx6iyuayetnsf4wfn24uuvedghdfb5o44v2lmrrfkbne6fdcolxhfyid.onion:8082 onioncouriermailer
 
