@@ -138,7 +138,7 @@ This results in 6 hops, instead of 3.
 
 ## oc_m2n_server.go
 
-oc_m2n_server.go allows you to send messages anonymously to Usenet via Dizum's mail2news Gateway.  
+oc_m2n_server.go allows you to send messages anonymously to Usenet via a mail2news Gateway.  
 This results in 6 hops, instead of 3.
 
 ## oc_middleman_server.go
