@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	password    = "secretPassword"
+	password    = "onioncouriermailer"
 	defaultFrom = "Onion Courier <noreply@your.domain>"
 	host        = "smtp.your.domain"
 	port        = "2525"
@@ -25,8 +25,8 @@ const (
 
 func main() {
 	http.HandleFunc("/upload", handleUpload)
-	fmt.Println("Server is running on http://localhost:8083")
-	http.ListenAndServe(":8083", nil)
+	fmt.Println("Server is running on http://localhost:8082")
+	http.ListenAndServe(":8082", nil)
 }
 
 func handleUpload(w http.ResponseWriter, r *http.Request) {
@@ -103,6 +103,24 @@ func extractHeaders(content []byte) (to string, from string, err error) {
 }
 
 func sendMail(message []byte, to string, from string) error {
+    hasFromHeader := bytes.Contains(bytes.ToLower(message), []byte("from:"))
+    
+    var headers []byte
+    if !hasFromHeader {
+        headers = []byte(fmt.Sprintf("From: %s\r\nNewsgroups: %s\r\n", from, to))
+    }
+    
+    finalMessage := append(headers, message...)
+    if !bytes.HasSuffix(finalMessage, []byte("\r\n")) {
+        finalMessage = append(finalMessage, []byte("\r\n")...)
+    }
+
+    emailOnly := from
+    if strings.Contains(from, "<") {
+        parts := strings.Split(from, "<")
+        emailOnly = strings.TrimSuffix(parts[1], ">")
+    }
+
 	dialer, err := proxy.SOCKS5("tcp", torProxy, nil, proxy.Direct)
 	if err != nil {
 		return fmt.Errorf("error creating SOCKS5 dialer: %v", err)
@@ -131,7 +149,7 @@ func sendMail(message []byte, to string, from string) error {
 		return fmt.Errorf("error starting TLS: %v", err)
 	}
 
-	if err = c.Mail(from); err != nil {
+	if err = c.Mail(emailOnly); err != nil {
 		return fmt.Errorf("error Mail: %v", err)
 	}
 
@@ -144,7 +162,7 @@ func sendMail(message []byte, to string, from string) error {
 		return fmt.Errorf("error Data: %v", err)
 	}
 
-	_, err = w.Write(message)
+	_, err = w.Write(finalMessage)
 	if err != nil {
 		return fmt.Errorf("error Write: %v", err)
 	}
