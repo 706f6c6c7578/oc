@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	password    = "onioncouriermailer"
+	password    = "secretpassword"
 	defaultFrom = "Onion Courier <noreply@your.domain>"
 	host        = "smtp.your.domain"
 	port        = "2525"
