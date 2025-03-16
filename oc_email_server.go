@@ -12,16 +12,15 @@ import (
 	"net/smtp"
 	"regexp"
 	"strings"
-
 	"golang.org/x/net/proxy"
 )
 
 const (
-	password = "secretPassword" // Set your desired password here
-	from     = "Onion Courier <noreply@your.domain>"
-	host     = "smtp.your.domain"
-	port     = "2525"
-	torProxy = "127.0.0.1:9050"
+	password    = "secretPassword"
+	defaultFrom = "Onion Courier <noreply@your.domain>"
+	host        = "smtp.your.domain"
+	port        = "2525"
+	torProxy    = "127.0.0.1:9050"
 )
 
 func main() {
@@ -35,7 +34,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Only POST requests are allowed", http.StatusMethodNotAllowed)
 		return
 	}
-	// Check the password
+
 	if r.Header.Get("X-Password") != password {
 		http.Error(w, "Invalid password", http.StatusUnauthorized)
 		return
@@ -48,7 +47,6 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 
-	// Read the file content
 	content, err := ioutil.ReadAll(file)
 	if err != nil {
 		log.Println("Error reading file:", err)
@@ -56,7 +54,7 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	to, err := extractToHeader(content)
+	to, customFrom, err := extractHeaders(content)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
@@ -67,53 +65,57 @@ func handleUpload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Send the content via email
-	err = sendMail(content, to)
+	fromHeader := defaultFrom
+	if customFrom != "" {
+		fromHeader = customFrom
+	}
+
+	err = sendMail(content, to, fromHeader)
 	if err != nil {
 		log.Println("Error sending mail:", err)
 		http.Error(w, "Error sending mail: "+err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	// Output to the client
 	fmt.Fprintf(w, "File received and sent.\nNo data is stored or logged by Onion Courier.\n")
 }
 
-func extractToHeader(content []byte) (string, error) {
+func extractHeaders(content []byte) (to string, from string, err error) {
 	scanner := bufio.NewScanner(bytes.NewReader(content))
-	re := regexp.MustCompile(`(?i)^To:\s*(.*)$`) // Case insensitive match for "To:"
+	toRe := regexp.MustCompile(`(?i)^To:\s*(.*)$`)
+	fromRe := regexp.MustCompile(`(?i)^From:\s*(.*)$`)
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		if match := re.FindStringSubmatch(line); match != nil {
-			return strings.TrimSpace(match[1]), nil
+		if match := toRe.FindStringSubmatch(line); match != nil {
+			to = strings.TrimSpace(match[1])
+		}
+		if match := fromRe.FindStringSubmatch(line); match != nil {
+			from = strings.TrimSpace(match[1])
 		}
 	}
 
 	if err := scanner.Err(); err != nil {
-		return "", fmt.Errorf("error reading content: %v", err)
+		return "", "", fmt.Errorf("error reading content: %v", err)
 	}
-	return "", nil
+
+	return to, from, nil
 }
 
-func sendMail(message []byte, to string) error {
-	// Create a SOCKS5 dialer
+func sendMail(message []byte, to string, from string) error {
 	dialer, err := proxy.SOCKS5("tcp", torProxy, nil, proxy.Direct)
 	if err != nil {
 		return fmt.Errorf("error creating SOCKS5 dialer: %v", err)
 	}
 
-	// Create a custom dialer function
 	customDialer := func(network, addr string) (net.Conn, error) {
 		return dialer.Dial(network, addr)
 	}
 
-	// Create a custom TLS config
 	tlsConfig := &tls.Config{
 		InsecureSkipVerify: true,
 	}
 
-	// Connect to the server using the custom dialer
 	conn, err := customDialer("tcp", host+":"+port)
 	if err != nil {
 		return fmt.Errorf("error connecting to server: %v", err)
@@ -153,6 +155,5 @@ func sendMail(message []byte, to string) error {
 	}
 
 	c.Quit()
-
 	return nil
 }
