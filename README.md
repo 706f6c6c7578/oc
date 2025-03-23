@@ -162,11 +162,6 @@ You simply create your messages on an offline computer and encrypt your payload 
 
 oc_email_server.go uses your VPS MTA, which should have a whitelist defined, for reachable email domains.
 
-## oc_onionmail_server.go
-
-oc_onionmail_server.go sends (unauthenticated) email messages to onionmail.org users, 
-which have an @gtfcy37qyzor7kb6blz2buwuu5u7qjkycasjdf3yaslibkbyhsxub4yd.onion address.
-
 It is advised that you always encrypt and sign your messages.
 
 ## Closing words
