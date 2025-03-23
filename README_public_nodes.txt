@@ -45,7 +45,6 @@ send@nymph.paranoici.org
 # MAIL TO NEWS GATEWAYS
 mail2news@dizum.com
 mail2news_nospam@dizum.com
-mail2news@oc2mx.net
 
 # PRIVACY EMAIL PROVIDERS
 danwin1210.de
