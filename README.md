@@ -131,16 +131,6 @@ HiddenServicePort 8082 127.0.0.1:8082
 HiddenServicePort 8083 127.0.0.1:8083  
 HiddenServicePort 8084 127.0.0.1:8084  
 
-## oc_paganini_server.go
-
-oc_paganini_server.go allows you to post to Usenet anonymously, with oc_client.go, via the Paganini Newsserver's .onion URL.  
-This results in 6 hops, instead of 3.
-
-## oc_m2n_server.go
-
-oc_m2n_server.go allows you to send messages anonymously to Usenet via a mail2news Gateway.  
-This results in 6 hops, instead of 3.
-
 ## oc_middleman_server.go
 
 oc_middleman_server.go is a middleman server which can be optionally used to send files through nine hops.  
