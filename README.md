@@ -180,7 +180,7 @@ This project is dedicated to Alice and Bob.
 ## Update April, 12th 2025
 
 oc_client was updated to version 0.1.1, so that user can use another proxy port,  
-besides the standard port Tor port 9050. This makes it possibel to use oc_client  
-with the Nym Mix Network, if the first Onion Courier hop (middleman) is reachable
+besides the standard Tor port 9050. This makes it possibel to use oc_client with  
+the Nym Mix Network, if the first Onion Courier hop (middleman) is reachable  
 over the clearnet.
 
