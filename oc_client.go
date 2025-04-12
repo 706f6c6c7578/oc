@@ -22,11 +22,13 @@ func main() {
 	var useClearnet bool
 	var filename string
 	var hideResponse bool
+	var proxyPort string
 	flag.StringVar(&username, "u", "", "Optional username")
 	flag.StringVar(&dataFile, "d", "", "File containing server addresses, ports, and passwords")
-	flag.BoolVar(&useClearnet, "clearnet", false, "Use clearnet instead of Tor")
+	flag.BoolVar(&useClearnet, "clearnet", false, "Use clearnet instead of Tor or Nym Mix Network")
 	flag.StringVar(&filename, "f", "", "File to upload")
 	flag.BoolVar(&hideResponse, "h", false, "Hide server response")
+	flag.StringVar(&proxyPort, "p", "9050", "Proxy port (default: 9050)")
 	flag.Parse()
 
 	var err error
@@ -43,7 +45,7 @@ func main() {
 				serverAddress = "http://" + serverAddress
 			}
 			serverURL := serverAddress + "/upload"
-			err = uploadFile(serverURL, password, username, filename, !useClearnet, hideResponse)
+			err = uploadFile(serverURL, password, username, filename, !useClearnet, hideResponse, proxyPort)
 			if err != nil {
 				fmt.Printf("\nError uploading file to %s: %v\n", serverAddress, err)
 			}
@@ -51,7 +53,7 @@ func main() {
 	} else {
 		args := flag.Args()
 		if len(args) != 2 {
-			fmt.Println("Usage: oc [-u username] [-d datafile] [-clearnet] [-h hide server response] \n          -f <filename> <server_address:port> <password>")
+			fmt.Println("Usage: oc [-u username] [-d datafile] [-clearnet] [-h hide server response] \n          [-p proxy port (default: 9050)] -f <filename> <server_address:port> <password>")
 			os.Exit(1)
 		}
 		serverAddress, password := args[0], args[1]
@@ -59,7 +61,7 @@ func main() {
 			serverAddress = "http://" + serverAddress
 		}
 		serverURL := serverAddress + "/upload"
-		err = uploadFile(serverURL, password, username, filename, !useClearnet, hideResponse)
+		err = uploadFile(serverURL, password, username, filename, !useClearnet, hideResponse, proxyPort)
 		if err != nil {
 			fmt.Printf("\nError uploading file: %v\n", err)
 			os.Exit(1)
@@ -68,52 +70,52 @@ func main() {
 }
 
 func readDataFile(filename string) ([][]string, error) {
-    file, err := os.Open(filename)
-    if err != nil {
-        return nil, err
-    }
-    defer file.Close()
+	file, err := os.Open(filename)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
 
-    var addresses [][]string
-    scanner := bufio.NewScanner(file)
-    for scanner.Scan() {
-        line := strings.TrimSpace(scanner.Text())
-        
-        // Skip empty lines and comments
-        if line == "" || strings.HasPrefix(line, "#") {
-            continue
-        }
+	var addresses [][]string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := strings.TrimSpace(scanner.Text())
+		
+		// Skip empty lines and comments
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
 
-        // Split by whitespace and filter out empty strings
-        parts := strings.Fields(line)
-        
-        // Ensure we have exactly two non-empty parts
-        var validParts []string
-        for _, part := range parts {
-            if trimmed := strings.TrimSpace(part); trimmed != "" {
-                validParts = append(validParts, trimmed)
-            }
-        }
+		// Split by whitespace and filter out empty strings
+		parts := strings.Fields(line)
+		
+		// Ensure we have exactly two non-empty parts
+		var validParts []string
+		for _, part := range parts {
+			if trimmed := strings.TrimSpace(part); trimmed != "" {
+				validParts = append(validParts, trimmed)
+			}
+		}
 
-        if len(validParts) != 2 {
-            continue // Skip invalid lines instead of returning error
-        }
+		if len(validParts) != 2 {
+			continue // Skip invalid lines instead of returning error
+		}
 
-        addresses = append(addresses, validParts)
-    }
+		addresses = append(addresses, validParts)
+	}
 
-    if err := scanner.Err(); err != nil {
-        return nil, err
-    }
+	if err := scanner.Err(); err != nil {
+		return nil, err
+	}
 
-    if len(addresses) == 0 {
-        return nil, fmt.Errorf("no valid entries found in data file")
-    }
+	if len(addresses) == 0 {
+		return nil, fmt.Errorf("no valid entries found in data file")
+	}
 
-    return addresses, nil
+	return addresses, nil
 }
 
-func uploadFile(serverURL, password, username, filename string, useTor, hideResponse bool) error {
+func uploadFile(serverURL, password, username, filename string, useTor, hideResponse bool, proxyPort string) error {
 	file, err := os.Open(filename)
 	if err != nil {
 		return fmt.Errorf("failed to open file: %w", err)
@@ -142,13 +144,14 @@ func uploadFile(serverURL, password, username, filename string, useTor, hideResp
 
 	var client *http.Client
 	if useTor {
-		dialer, err := proxy.SOCKS5("tcp", "localhost:9050", nil, proxy.Direct)
+		torAddress := fmt.Sprintf("localhost:%s", proxyPort)
+		dialer, err := proxy.SOCKS5("tcp", torAddress, nil, proxy.Direct)
 		if err != nil {
-			return fmt.Errorf("can't connect to the Tor proxy: %v", err)
+			return fmt.Errorf("can't connect to the proxy at %s: %v", torAddress, err)
 		}
 		httpTransport := &http.Transport{Dial: dialer.Dial}
 		client = &http.Client{Transport: httpTransport}
-		fmt.Println("Using Tor network")
+		fmt.Printf("Using network (proxy port: %s)\n", proxyPort)
 	} else {
 		client = &http.Client{}
 		fmt.Println("Using clearnet")
