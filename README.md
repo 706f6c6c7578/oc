@@ -2,12 +2,12 @@
 
 ## Client oc_client.go
 This client allows you to securely send files to a server
-using either the Tor network (for enhanced privacy) or clearnet.  
+using the Tor network for enhanced privacy.   
 It supports various options for flexibility and ease of use.
 
 ## Features
 
-- Send data through Tor network (default) or clearnet
+- Send data through Tor network
 - Optional username support
 - Use of a data file for server address:port and password
 - Optional -h parameter to hide server response
@@ -49,22 +49,21 @@ Please note:  The last entry in your data_file must be a single LF or CRLF and n
 
 ## Options
 
-- `-u [username]`: Specify an optional username
-- `[-clearnet`]: Use clearnet instead of Tor network
+- `-u [username]`: Specify an optional username  
 - `-f <filename>`: Specify the filename to be send, which is used on the server
 - `-d <data_file>`: Use a data file containing server address:port and password
 - `[-h`}: Hide server response
 
 ## Examples
 
-1. Send data through Tor:
+1. Send data:
 
 $ oc_client -f myfile.txt URL.onion:8080 mypassword
 
 
-2. Send data using clearnet with a username:
+2. Send data with a username:
 
-$ oc_client -u myusername -clearnet example.com:8080 mypassword -f myfile.txt
+$ oc_client -u myusername URL.onion:8080 mypassword -f myfile.txt
 
 
 3. Send data using a data file:
@@ -72,16 +71,9 @@ $ oc_client -u myusername -clearnet example.com:8080 mypassword -f myfile.txt
 $ oc_client -d server_data.txt -f myfile.txt
 
 
-## Notes
-
-- By default, the client uses the Tor network. Make sure you have Tor
-  running on your system (usually on port 9050).
-- When using the `-clearnet` option, your IP address will be visible to the server.
-
 ## Security Considerations
 
 - Be cautious when sending sensitive files and consider using encryption before sending.
-- The Tor network provides anonymity but may be slower than data send through clearnet.
 
 
 ## Server oc_server.go
