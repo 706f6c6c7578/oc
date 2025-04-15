@@ -123,24 +123,6 @@ HiddenServicePort 8082 127.0.0.1:8082
 HiddenServicePort 8083 127.0.0.1:8083  
 HiddenServicePort 8084 127.0.0.1:8084  
 
-## oc_middleman_server.go
-
-oc_middleman_server.go is a middleman server which can be optionally used to send files through nine hops.  
- The accepted message size for a Middleman is limited to 42 KB.
-
-Example Usenet message:
-
-X-OC-To: utxloshiyxfxl7qxvcfglu4lscetfrxvagqqsaarl6kz2oxkoyp3tbid.onion:8081 secretPassword  
-From: Bob <bob@example.org>  
-Subject: Onion Courier Middleman Test  
-Newsgroups: alt.test
-
-Hello World! :-)
-
---   
-Regards  
-Bob
-
 ## oc_node_server.go
 
 oc_node_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior it sends it to the next hop. The accepted message size for a node is limited to 4096 KB.  
