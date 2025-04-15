@@ -126,8 +126,7 @@ HiddenServicePort 8084 127.0.0.1:8084
 ## oc_middleman_server.go
 
 oc_middleman_server.go is a middleman server which can be optionally used to send files through nine hops.  
-It needs a special file format, containing an X-OC-To: header. Multiple middleman hops are supported by  
-adding additional X-OC-To headers. The accepted message size for a Middleman is limited to 42 KB.
+ The accepted message size for a Middleman is limited to 42 KB.
 
 Example Usenet message:
 
@@ -142,12 +141,16 @@ Hello World! :-)
 Regards  
 Bob
 
-## oc_guard_server.go
+## oc_node_server.go
 
-oc_guard_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior it sends it to middlemen.    The accepted message size for a Guard is limited to 42 KB.    
-A new -h (hide server response) parameter was  added to oc_client.go, so that users can hide the server response.  
-Why and when should you use a Guard node as first hop?  
-In case you are not sure if your online computer is monitored by spyware.  
+oc_node_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior it sends it to the next hop. The accepted message size for a node is limited to 4096 KB.  
+
+A node needs a special file format, containing an X-OC-To: header. Multiple hops are supported by  
+chaining messages, like Cypherpunk Remailers (TypeI) do.
+  
+Why and when should you use nodes?  
+In case you are not sure if your online computer is monitored by spyware.
+
 You simply create your messages on an offline computer and encrypt your payload with minicrypt, prior sending data with your online computer.
 
 ## oc_email_server.go
