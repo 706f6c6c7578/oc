@@ -4,11 +4,23 @@ Public Onion Courier nodes:
 1. node ulf
 5s6chpom2x77gl5pehdea3jrone46r5vqs5p4u2rhhneutzsp4fvzsqd.onion:8088 1c596a0b3f9f091a85ce22a5f89cd128852ce74c
 
+-----BEGIN PUBLIC KEY-----
+UJhusyz+JntOIplMHk83mF2ZraKAKGcOEbAce0Vahlo=
+-----END PUBLIC KEY-----
+
 2. node hal
 l4nm5ddjumr6lqrdv6tiwrttdozxqita2dtqeb4oxtl6vhcea7wwyjyd.onion:8088 efa84cf9ddc2a92b1a9ccb7b650d15c3154d91ee
 
+-----BEGIN PUBLIC KEY-----
+XLtZGc+Y3wSWM0fMWsiXxB1BmReJkO3UGMTdDt2+D2E=
+-----END PUBLIC KEY-----
+
 3. node len
 5eery7vpawbafpllddnjgrxcubpef7a3ccdenoivf3yng4prdnnlw5ad.onion:8088 7de0cf57741cb34eef394a8ec2ac17281f0e5f21
+
+-----BEGIN PUBLIC KEY-----
+WDEcoJQnR3qoZAjC5U+njfNhkDgvGJQSYCzMNWToIRQ=
+-----END PUBLIC KEY-----
 
 4. Onion Courier email Gateway bob - noreply@oc2mx.net
 bx6iyuayetnsf4wfn24uuvedghdfb5o44v2lmrrfkbne6fdcolxhfyid.onion:8082 9f62d3796002635cd6f282f3f7adeec17a85f1a7
