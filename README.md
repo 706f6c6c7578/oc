@@ -127,8 +127,7 @@ HiddenServicePort 8084 127.0.0.1:8084
 
 oc_node_server.go uses [minicrypt](https://github.com/706f6c6c7578/minicrypt) to decrypt incoming data, prior it sends it to the next hop. The accepted message size for a node is limited to 4096 KB.  
 
-A node needs a special file format, containing an X-OC-To: header. Multiple hops are supported by  
-chaining messages, like Cypherpunk Remailers (TypeI) do.
+A node needs a special file format, containing an X-OC-To: header. Multiple hops are supported by chaining messages, like Cypherpunk Remailers (TypeI) do.
   
 Why and when should you use nodes?  
 In case you are not sure if your online computer is monitored by spyware.
