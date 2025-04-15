@@ -1,4 +1,4 @@
-## A message from Alice to Bob
+## A message from Alice to Bob:
 
 $ oc_client -u Alice -d data.txt -f msg.txt
 
@@ -11,7 +11,7 @@ a format error appears)
 
 ## A message to the Usenet Group alt.test
 
-data.txt contains the mailer data.
+data.txt contains the mailer data:
 
 To: mail2news@dizum.com
 Subject: Test
@@ -36,15 +36,21 @@ Content-Transfer-Encoding: 7bit
 
 Hi
 
-## An email, via a Guard node and Middleman
+## An email, via nodes:
 
 data.txt must contain as first hop the
-onionURL:port password of the Guard node.
+onionURL:port password of the first hop.
 
-The message then needs a prepended header
-of the middleman.
+The message with headers needs to be encrypted
+with minicrypt and the nodes public key.
 
-X-OC-To: onionURl:port password of middleman
+Chaining of nodes is done by re-encrypting the
+encrypted message with the next hop public key.
+
+The final message then needs a prepended header
+of the first node in the chain.
+
+X-OC-To: onionURl:port password of node_1, node_2, etc.
 X-OC-To: onionURL:port password of mailer
 To: bob@example.org
 Subject: Hello
@@ -52,7 +58,3 @@ Subject: Hello
 Hi Bob!
 
 Best Alice
-
-After that the message  needs to be encrypted
-with the public key of the Guard node, done with
-minicrypt and send to the guard node in data.txt.
