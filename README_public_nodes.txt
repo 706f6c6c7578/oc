@@ -25,7 +25,7 @@ WDEcoJQnR3qoZAjC5U+njfNhkDgvGJQSYCzMNWToIRQ=
 4. Onion Courier email Gateway bob - noreply@oc2mx.net
 bx6iyuayetnsf4wfn24uuvedghdfb5o44v2lmrrfkbne6fdcolxhfyid.onion:8082 9f62d3796002635cd6f282f3f7adeec17a85f1a7
 
-5. Nym Mixnet Gateway iria
+5. Nym Mixnet Gateway iria - oc2mx.net
 oc2mx.net:8083 dc53d73cbd2daaab0c79abaecddeeae4466bddfa
 
 The following Domains are whitelisted:
