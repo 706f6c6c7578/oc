@@ -31,27 +31,25 @@ oc2mx.net:8083 dc53d73cbd2daaab0c79abaecddeeae4466bddfa
 The following Domains are whitelisted:
 
 # MIXMASTER REMAILERS
-mixmaster@binski.net        
-remailer@dizum.com 
-mix@erienetworks.net   
-mix@franxial.com        
+mixmaster@binski.net
+remailer@dizum.com
+mix@franxial.com
 godot@remailer.frell.eu.org
 godot2@remailer.frell.eu.org
 mix@eocto.net
 mix@middleman.remailer.online
 mixmaster@remailer.paranoici.org
-senshiremailer@gmx.de
 mix@shalo.ca
 
 # YAMN REMAILERS
 nyam@remailer.frell.eu.org
 yamn@eocto.net
-yamn@gronk.ch
 yamn@middleman.remailer.online
 yamn@milton.redmv.net
 yamn@yamn.paranoici.org
 yamn@shalo.ca
 yamn@virebent.art
+yamn@yeahno.net
 
 # NYM SERVERS
 config@nymph.paranoici.org
