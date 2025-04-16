@@ -83,8 +83,8 @@ inbox.ru (mail.ru anonymizer domain)
 list.ru (mail.ru anonymizer domain)
 
 If you run a public node and want it to be added
-on this list, post a message to the Usenet Group
-alt.privacy.anon-server
+to this list, post a message to the Usenet Group
+alt.privacy.anon-server.
 
 You can contact me via Onion Courier:
 
