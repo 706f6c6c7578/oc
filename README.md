@@ -140,6 +140,11 @@ oc_email_server.go uses your VPS MTA, which should have a whitelist defined, for
 
 It is advised that you always encrypt and sign your messages.
 
+## oc_mail2node.go
+
+oc_mail2node is a Gateway for sending webmail messages to Onion Courier nodes or  
+or directly to Onion Courier users.
+
 ## Closing words
 
 If you like the idea of point to point communication, without third-party
