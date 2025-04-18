@@ -28,6 +28,8 @@ bx6iyuayetnsf4wfn24uuvedghdfb5o44v2lmrrfkbne6fdcolxhfyid.onion:8082 9f62d3796002
 5. Nym Mixnet Gateway iria - oc2mx.net
 oc2mx.net:8083 dc53d73cbd2daaab0c79abaecddeeae4466bddfa
 
+6. Webmail to Onion Courier Gateway - mail2node@oc2mx.net
+
 The following Domains are whitelisted:
 
 # MIXMASTER REMAILERS
@@ -59,6 +61,9 @@ send@nymph.paranoici.org
 mail2news@dizum.com
 mail2news_nospam@dizum.com
 mail2news@oc2mx.net
+
+# MAIL TO ONION COURIER GATEWAY
+mail2node@oc2mx.net
 
 # PRIVACY EMAIL PROVIDERS
 danwin1210.de
