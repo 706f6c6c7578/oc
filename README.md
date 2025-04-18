@@ -142,8 +142,8 @@ It is advised that you always encrypt and sign your messages.
 
 ## oc_mail2node.go
 
-oc_mail2node is a Gateway for sending webmail messages to Onion Courier nodes or  
-or directly to Onion Courier users.
+oc_mail2node.go is a Gateway for sending webmail messages to Onion Courier nodes or  
+directly to Onion Courier users.
 
 ## Closing words
 
